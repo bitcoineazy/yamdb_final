@@ -52,7 +52,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
-          stack_file_name: docker-compose.yaml
           script: |
             sudo docker pull noble6/yamdb_final
             sudo docker stop $(sudo docker ps -a -q)
