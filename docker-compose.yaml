@@ -12,7 +12,7 @@ services:
     image: noble6/yamdb_final:latest
     restart: always
     volumes:
-      - static_value:/var/html/static/
+      - static:/static
     depends_on:
       - db
     env_file:
@@ -24,7 +24,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - static_value:/var/html/static/
+      - static:/static
       - media_value:/var/html/media/
     depends_on:
       - web
