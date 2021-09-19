@@ -2,29 +2,42 @@
 
 ![yamdb_workflow](https://github.com/bitcoineazy/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
+[![docker](https://img.shields.io/badge/-Docker-464646??style=flat-square&logo=docker)](https://www.docker.com/)
+[![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-464646??style=flat-square&logo=PostgreSQL)](https://www.postgresql.org/)
+[![NGINX](https://img.shields.io/badge/-NGINX-464646??style=flat-square&logo=NGINX)](https://nginx.org/ru/)
+[![Python](https://img.shields.io/badge/-Python-464646??style=flat-square&logo=Python)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/-Django-464646??style=flat-square&logo=Django)](https://www.djangoproject.com/)
+[![GitHub%20Actions](https://img.shields.io/badge/-GitHub%20Actions-464646??style=flat-square&logo=GitHub%20actions)](https://github.com/features/actions)
+[![GitHub](https://img.shields.io/badge/-GitHub-464646??style=flat-square&logo=GitHub)](https://github.com/)
+
+
 ***REST API*** для сбора отзывов пользователей на произведения.<br>
-Ресурс доступен по адресу [62.84.112.39/redoc/](62.84.112.39/redoc/)
+* Ресурс доступен по адресу [62.84.112.39/admin/](http://62.84.112.39/admin/) 
+* Данные для входа в интерфейс администратора ```username:pass = admin:admin```
+
+Обращение к API сервиса:
+* http://62.84.112.39/api/v1/auth/token/
+* http://62.84.112.39/api/v1/users/
+* http://62.84.112.39/api/v1/titles/
+* http://62.84.112.39/api/v1/genres/
+* http://62.84.112.39/api/v1/categories/
+* http://62.84.112.39/api/v1/titles/{title_id}/reviews/
+* http://62.84.112.39/api/v1/titles/{title_id}/reviews/{review_id}/
+* http://62.84.112.39/api/v1/titles/{title_id}/reviews/{review_id}/comments/
 
 
-# Стэк технологий
-- Django, gunicorn
-- PostgreSQL
-- Docker
-- nginx
-
-
-# Запуск сервиса
+# Установка и запуск сервиса
  
 1. Установить: [docker](https://www.docker.com/get-started), [docker-compose](https://docs.docker.com/compose/install/)
-2. Собрать проект и запустить: ```docker-compose up --build```
-3. Собрать базу данных на основе ресурсов: ```sudo docker-compose exec web python manage.py makemigrations && sudo docker-compose exec web python manage.py migrate```
-4. Создать профиль администратора: ```sudo docker-compose exec web python manage.py createsuperuser```
-5. Через интерфейс администратора [0.0.0.0/admin](0.0.0.0/admin) можно создавать новые записи в бд
-
+2. Собрать базу данных на основе ресурсов: ```sudo docker-compose exec web python manage.py makemigrations && sudo docker-compose exec web python manage.py migrate```
+3. Создать профиль администратора: ```sudo docker-compose exec web python manage.py createsuperuser```
+4. Собрать статику: ```sudo docker-compose exec web python manage.py collectstatic```
+5. Через интерфейс администратора [0.0.0.0/admin](https://0.0.0.0/admin) можно создавать новые записи в бд
+6. Собрать проект и запустить: ```docker-compose up --build```
 
 # Документация
 
-- Находится по адресу [0.0.0.0/redoc.htlm](0.0.0.0/redoc.htlm)
+- Находится по адресу [0.0.0.0/redoc.htlm](https://0.0.0.0/redoc.htlm)
 - Каждый ресурс описан в документации: указаны эндпоинты (адреса, по которым можно сделать запрос), разрешённые типы запросов, права доступа и дополнительные параметры, если это необходимо.
 
 # Ресурсы API
