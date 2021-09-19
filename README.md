@@ -2,7 +2,9 @@
 
 ![yamdb_workflow](https://github.com/bitcoineazy/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)
 
-***REST API*** для сбора отзывов пользователей на произведения.
+***REST API*** для сбора отзывов пользователей на произведения.<br>
+Ресурс доступен по адресу 62.84.112.39/redoc/
+
 
 # Стэк технологий
 - Django, gunicorn
