@@ -53,6 +53,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            cd yamdb_final/
             sudo docker stop $(docker ps -a -q)
             sudo docker system prune --force
             sudo docker pull noble6/yamdb_final
