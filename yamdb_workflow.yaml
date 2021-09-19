@@ -1,9 +1,8 @@
-name: YamDB deployer
+name: YamDB workflow
 on: [push]
 jobs:
   tests:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
@@ -13,7 +12,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest
+          pip install flake8 pep8-naming flake8-broken-line flake8-return flake8-isort
           pip install -r requirements.txt
       - name: Test with flake8 and django tests
         run: |
@@ -53,9 +52,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
+            sudo docker stop $(docker ps -a -q)
+            sudo docker system prune --force
             sudo docker pull noble6/yamdb_final
-            sudo docker stop $(sudo docker ps -a -q)
-            docker rm -f $(docker ps -a -q)
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
@@ -63,14 +62,15 @@ jobs:
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
-            sudo docker-compose up -d
+            sudo docker-compose up -d --build
 
   telegram_notification:
-    name: Telegram successful notification
     runs-on: ubuntu-latest
+    name: Telegram notification
+    needs: deploy
     steps:
       - uses: actions/checkout@master
-      - name: Telegram Notify
+      - name: deploy done
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
