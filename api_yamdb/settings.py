@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'reviews',
     'users',
     'import_export',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'users.User'
